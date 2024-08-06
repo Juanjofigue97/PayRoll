@@ -19,20 +19,20 @@ begin
 end
 
 
---if not exists (select 1 from dbo.Branches)
---begin
---    declare @agencyId1 int; 
---    declare @agencyId2 int; 
---    declare @agencyId3 int; 
+if not exists (select 1 from dbo.Branches)
+begin
+    declare @agencyId1 int; 
+    declare @agencyId2 int; 
+    declare @agencyId3 int; 
     
---    select @agencyId1 = Id from dbo.Agencies where Name = 'Pasto' 
---    select @agencyId2 = Id from dbo.Agencies where Name = 'Sandona' 
---    select @agencyId3 = Id from dbo.Agencies where Name = 'Ipiales' 
+    select @agencyId1 = Id from dbo.Agencies where Name = 'Pasto' 
+    select @agencyId2 = Id from dbo.Agencies where Name = 'Sandona' 
+    select @agencyId3 = Id from dbo.Agencies where Name = 'Ipiales' 
 
---    insert into dbo.Branches("Name",Description,AgencyId)
---    values('Pasto','Agencia Principal de la Coopetativa',@agencyId1),
---    ('Chachagui','Extension',@agencyId1),
---    ('Nariño','Extension',@agencyId1),
---    ('Sandona','Agencia',@agencyId2),
---    ('Ipiales','Extension',@agencyId3)
---end
+    insert into dbo.Branches("Name",Description,AgencyId)
+    values('Pasto','Agencia Principal de la Coopetativa',@agencyId1),
+    ('Chachagui','Extension',@agencyId1),
+    ('Nariño','Extension',@agencyId1),
+    ('Sandona','Agencia',@agencyId2),
+    ('Ipiales','Extension',@agencyId3)
+end
