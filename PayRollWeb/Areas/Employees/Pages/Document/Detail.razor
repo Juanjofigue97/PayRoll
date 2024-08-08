@@ -1,4 +1,4 @@
-﻿@inject IAgencyRepository db
+﻿@inject IEmployeeRepository db
 @inject DialogService dialogService
 
 <h3>Detalles</h3>
@@ -10,7 +10,7 @@
                 <RadzenText TextStyle="TextStyle.Subtitle1">Nombre</RadzenText>
                 <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center">
                     <RadzenStack Gap="0" class="rz-text-truncate">
-                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@branch.Name</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@document.Name</RadzenText>
                     </RadzenStack>
                 </RadzenStack>
             </RadzenColumn>
@@ -18,17 +18,7 @@
                 <RadzenText TextStyle="TextStyle.Subtitle1">Descripcion</RadzenText>
                 <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center">
                     <RadzenStack Gap="0" class="rz-text-truncate">
-                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@branch.Description</RadzenText>
-                    </RadzenStack>
-                </RadzenStack>
-            </RadzenColumn>
-        </RadzenRow>
-        <RadzenRow>
-            <RadzenColumn Size="12" SizeMD="6" class="rz-p-4 rz-border-radius-1" Style="border: var(--rz-grid-cell-border)">
-                <RadzenText TextStyle="TextStyle.Subtitle1">Agencia</RadzenText>
-                <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center">
-                    <RadzenStack Gap="0" class="rz-text-truncate">
-                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@branch.AgencyName</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@document.Description</RadzenText>
                     </RadzenStack>
                 </RadzenStack>
             </RadzenColumn>
@@ -37,13 +27,13 @@
 </RadzenStack>
 
 @code{
-    private BranchModelView branch = new();
+    private DocumentTypesModel document = new();
 
     [Parameter] public int Id { get; set; }
 
     private async Task RefreshData()
     {
-        branch = await db.DetailViewBranch(Id);
+        document = await db.GetDocumentByID(Id);
     }
 
     protected override async Task OnInitializedAsync()

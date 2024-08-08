@@ -1,5 +1,6 @@
 ﻿using PayRollLibrary.Databases;
 using PayRollLibrary.Models.Agencies;
+using PayRollLibrary.ModelView.Agencies;
 using System.Xml.Linq;
 
 namespace PayRollLibrary.Data;
@@ -112,8 +113,26 @@ public class SqlAgencyRepository : IAgencyRepository
                                          {
                                              id = branch.Id,
                                              name = branch.Name,
-                                             description = branch.Description
+                                             description = branch.Description,
+                                             agencyId = branch.AgencyId
                                          },
+                                         connectionString,
+                                         new { IsStoedProcedure = true });
+    }
+
+    public async Task<List<BranchModelView>?> GetAllDetailViewBranches()
+    {
+        string sql = "dbo.spBranches_GetAllDetailView";
+        return await _db.LoadDataAsync<BranchModelView, dynamic>(sql,
+                                                  new { },
+                                                  connectionString,
+                                                  new { IsStoedProcedure = true });
+    }
+    public async Task<BranchModelView?> DetailViewBranch(int branchId)
+    {
+        string sql = "dbo.spBranches_DetailView";
+        return await _db.FirstValueAsync<BranchModelView, dynamic>(sql,
+                                         new{ branchId },
                                          connectionString,
                                          new { IsStoedProcedure = true });
     }

@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[PaymentData]
 (
-	[Id] INT NOT NULL PRIMARY KEY,
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
 	[EmployeeId] INTEGER,
 	[BankName] VARCHAR,
 	[AccountNumber] VARCHAR,

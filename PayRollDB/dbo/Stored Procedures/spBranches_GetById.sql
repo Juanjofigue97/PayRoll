@@ -3,6 +3,6 @@
 AS
 begin
 	set nocount on;
-	select Id,Name,Description
+	select *
 	from dbo.Branches where Id = @branchId;
 end

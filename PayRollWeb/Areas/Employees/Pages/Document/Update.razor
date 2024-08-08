@@ -1,0 +1,50 @@
+﻿@inject IEmployeeRepository db
+@inject DialogService dialogService
+
+<h3>Editar</h3>
+
+<RadzenStack Gap="1rem" Orientation="Orientation.Vertical" JustifyContent="JustifyContent.SpaceBetween" Style="height: 100%;">
+    <RadzenStack>
+        <EditForm Model="documentToUpdate" method="post" OnValidSubmit="UpdateDocument">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <RadzenFieldset Text="Tipo de Contrato">
+                <RadzenStack>
+                    <RadzenFormField Text="Nombre" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="@documentToUpdate.Name" />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Descripción" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="documentToUpdate.Description" />
+                    </RadzenFormField>
+                </RadzenStack>
+            </RadzenFieldset>
+            <button type="submit" class="btn btn-primary">Editar</button>
+        </EditForm>
+    </RadzenStack>
+</RadzenStack>
+
+
+
+
+@code {
+    private DocumentTypesModel documentToUpdate = new();
+
+    [Parameter] public int Id { get; set; }
+
+    private async Task UpdateDocument()
+    {
+        await db.UpdateDocument(documentToUpdate);
+        dialogService.Close(true);
+    }
+
+    private async Task RefreshData()
+    {
+        documentToUpdate = await db.GetDocumentByID(Id);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        await RefreshData();
+    }
+}

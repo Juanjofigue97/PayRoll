@@ -1,0 +1,40 @@
+﻿@inject IEmployeeRepository db
+@inject DialogService dialogService
+
+<h3>Crear Tipo de Contrato</h3>
+
+<RadzenStack Gap="1rem" Orientation="Orientation.Vertical" JustifyContent="JustifyContent.SpaceBetween" Style="height: 100%;">
+    <RadzenStack>
+        <EditForm Model="contract" method="post" OnValidSubmit="CreateContract">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <RadzenFieldset Text="Crear Tipo de Contrato">
+                <RadzenStack>
+                    <RadzenFormField Text="Nombre" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="@contract.Name" />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Descripción" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="@contract.Description" />
+                    </RadzenFormField>
+                </RadzenStack>
+            </RadzenFieldset>
+            <button type="submit" class="btn btn-primary">Crear</button>
+        </EditForm>
+    </RadzenStack>
+</RadzenStack>
+
+@code {
+    private ContractTypesModel contract = new();
+    
+    private async Task CreateContract()
+    {
+        await db.InsertContract(contract);
+        contract = new();
+        dialogService.Close(true);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+}

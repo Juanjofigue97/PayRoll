@@ -1,0 +1,40 @@
+﻿@inject IEmployeeRepository db
+@inject DialogService dialogService
+
+<h3>Crear Tipo de Documento</h3>
+
+<RadzenStack Gap="1rem" Orientation="Orientation.Vertical" JustifyContent="JustifyContent.SpaceBetween" Style="height: 100%;">
+    <RadzenStack>
+        <EditForm Model="document" method="post" OnValidSubmit="CreateDocument">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <RadzenFieldset Text="Crear Tipo de Contrato">
+                <RadzenStack>
+                    <RadzenFormField Text="Nombre" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="@document.Name" />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Descripción" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="@document.Description" />
+                    </RadzenFormField>
+                </RadzenStack>
+            </RadzenFieldset>
+            <button type="submit" class="btn btn-primary">Crear</button>
+        </EditForm>
+    </RadzenStack>
+</RadzenStack>
+
+@code {
+    private DocumentTypesModel document = new();
+    
+    private async Task CreateDocument()
+    {
+        await db.InsertDocument(document);
+        document = new();
+        dialogService.Close(true);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+}

@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[OtherExpenses]
 (
-	[Id] INT NOT NULL PRIMARY KEY,
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
 	[EmployeeId] INTEGER,
 	[Description] VARCHAR(200),
 	[Amount] DECIMAL,

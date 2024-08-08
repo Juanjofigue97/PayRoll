@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Earned]
 (
-	[Id] INT NOT NULL PRIMARY KEY,
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
 	[EmployeeId] INTEGER,
 	[Commission] MONEY,
 	[TransportationAllowance] MONEY,

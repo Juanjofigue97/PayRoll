@@ -1,0 +1,40 @@
+﻿@inject IEmployeeRepository db
+@inject DialogService dialogService
+
+<h3>Crear Cargo</h3>
+
+<RadzenStack Gap="1rem" Orientation="Orientation.Vertical" JustifyContent="JustifyContent.SpaceBetween" Style="height: 100%;">
+    <RadzenStack>
+        <EditForm Model="position" method="post" OnValidSubmit="CreatePosition">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <RadzenFieldset Text="Crear Cargo">
+                <RadzenStack>
+                    <RadzenFormField Text="Nombre" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="@position.Name" />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Descripción" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="@position.Description" />
+                    </RadzenFormField>
+                </RadzenStack>
+            </RadzenFieldset>
+            <button type="submit" class="btn btn-primary">Crear</button>
+        </EditForm>
+    </RadzenStack>
+</RadzenStack>
+
+@code {
+    private PositionModel position = new();
+    
+    private async Task CreatePosition()
+    {
+        await db.InsertPosition(position);
+        position = new();
+        dialogService.Close(true);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+}

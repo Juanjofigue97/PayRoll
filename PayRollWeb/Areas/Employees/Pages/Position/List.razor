@@ -1,6 +1,6 @@
-﻿@page "/Extensiones"
+﻿@page "/Contract"
 
-@inject IAgencyRepository bd
+@inject IEmployeeRepository bd
 @inject DialogService DialogService
 @inject IJSRuntime JSRuntime
 
@@ -9,16 +9,16 @@
     <RadzenButton Click="@RefreshData" Icon="autorenew" ButtonStyle="ButtonStyle.Primary"></RadzenButton>
 </div>
 
-<h3 class="pt-2">Extensiones</h3>
+<h3 class="pt-2">Tipo de Contrato</h3>
 
-@if (branch is null)
+@if (position is null)
 {
     <p>Cargando ...</p>
 }
 else
 {
-    <RadzenDataGrid TItem="BranchModelView"
-                    Data="@branch"
+    <RadzenDataGrid TItem="PositionModel"
+                    Data="@position"
                     AllowPaging="true"
                     PageSize="10"
                     AllowSorting="true"
@@ -27,11 +27,10 @@ else
                     ColumnWidth="200px">
 
         <Columns>
-            <RadzenDataGridColumn TItem="BranchModelView" Property="@nameof(BranchModelView.Id)" Title="ID" Width="50px" />
-            <RadzenDataGridColumn TItem="BranchModelView" Property="@nameof(BranchModelView.Name)" Title="Nombre" Width="100px" />
-            <RadzenDataGridColumn TItem="BranchModelView" Property="@nameof(BranchModelView.Description)" Title="Descripción" Width="150px" />
-            <RadzenDataGridColumn TItem="BranchModelView" Property="@nameof(BranchModelView.AgencyName)" Title="Agencia" Width="150px" />
-            <RadzenDataGridColumn TItem="BranchModelView" Property="Id" Title="Opciones" Width="150px">
+            <RadzenDataGridColumn TItem="PositionModel" Property="@nameof(PositionModel.Id)" Title="ID" Width="50px" />
+            <RadzenDataGridColumn TItem="PositionModel" Property="@nameof(PositionModel.Name)" Title="Nombre" Width="100px" />
+            <RadzenDataGridColumn TItem="PositionModel" Property="@nameof(PositionModel.Description)" Title="Descripción" Width="150px" />
+            <RadzenDataGridColumn TItem="PositionModel" Property="Id" Title="Opciones" Width="150px">
                 <Template>
                     <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="1rem" Wrap="FlexWrap.Wrap">
                         <RadzenButton Click=@(args => OpenRead(context.Id)) Icon="privacy_tip" ButtonStyle="ButtonStyle.Info" />
@@ -47,12 +46,12 @@ else
 
 
 @code {
-    List<BranchModelView>? branch;
+    List<PositionModel>? position;
 
     private async Task RefreshData()
     {
-        branch = null;
-        branch = await bd.GetAllDetailViewBranches();
+        position = null;
+        position = await bd.GetAllPosition();
     }
     private async Task OpenRead(int id)
     {
@@ -109,7 +108,7 @@ else
         }
         if (result)
         {
-            await bd.DeleteBranch(id);
+            await bd.DeletePosition(id);
         }
         await RefreshData();
     }

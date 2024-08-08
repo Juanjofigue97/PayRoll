@@ -15,6 +15,7 @@ builder.Services.AddRadzenComponents();
 
 builder.Services.AddTransient<IDataAccess, SqlDataAccess>();
 builder.Services.AddTransient<IAgencyRepository, SqlAgencyRepository>();
+builder.Services.AddTransient<IEmployeeRepository, SqlEmployeeRepository>();
 
 
 var app = builder.Build();

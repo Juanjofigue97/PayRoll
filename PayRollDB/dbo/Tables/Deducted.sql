@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Deducted]
 (
-	[Id] INT NOT NULL PRIMARY KEY,
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
 	[EmployeeId] INTEGER,
 	[EarnedId] INTEGER,
 	[Health] MONEY,

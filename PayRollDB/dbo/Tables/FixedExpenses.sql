@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[FixedExpenses]
 (
-	[Id] INT NOT NULL PRIMARY KEY,
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
 	[EmployeeId] INTEGER,
 	[Description] VARCHAR,
 	[Amount] DECIMAL,

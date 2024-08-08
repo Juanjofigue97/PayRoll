@@ -85,9 +85,16 @@
     <Build Include="dbo\Stored Procedures\spBranches_GetById.sql" />
     <Build Include="dbo\Stored Procedures\spBranches_Insert.sql" />
     <Build Include="dbo\Stored Procedures\spBranches_Update.sql" />
+    <Build Include="dbo\Stored Procedures\spBranches_DetailView.sql" />
+    <Build Include="dbo\Stored Procedures\spBranches_GetAllDetailView.sql" />
+    <Build Include="dbo\Stored Procedures\spContracts_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\spDocuments_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\spEmployees_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\spPositions_Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment.sql" />
+    <None Include="dbo\Scripts\Script.PostDeployment_AddEmployee.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\Publish Profiles\PayRollDB.publish.xml" />

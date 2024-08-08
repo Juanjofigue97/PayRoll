@@ -1,7 +1,8 @@
 ﻿CREATE TABLE [dbo].[Employees]
 (
-	[Id] INT NOT NULL PRIMARY KEY,
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
 	[DocumentTypeId] INTEGER,
+	[Document] VARCHAR(50),
 	[LastName] VARCHAR(50),
 	[SecondSurname] VARCHAR(50),
 	[FirstName] VARCHAR(50),

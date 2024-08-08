@@ -22,7 +22,7 @@
                             {
                                 @foreach (var a in agencyNames)
                                 {
-                                    <option value="@a.Id">@a.Name</option>
+                                    <option value="@a?.Id">@a?.Name</option>
                                 }
                             }
                         </InputSelect>
