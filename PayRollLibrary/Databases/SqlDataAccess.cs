@@ -19,9 +19,10 @@ public class SqlDataAccess : IDataAccess
     }
     public T FirstValue<T, U>(string sqlStatement,
                               U parameters,
-                              string conexionString,
+                              string conexionStringName,
                               dynamic? options = null)
     {
+        string conexionString = _config.GetConnectionString(conexionStringName)!;
         CommandType commandType = CommandType.Text;
 
         if (options?.IsStoedProcedure != null && options?.IsStoedProcedure == true)
@@ -37,9 +38,10 @@ public class SqlDataAccess : IDataAccess
     }
     public async Task<T?> FirstValueAsync<T, U>(string sqlStatement,
                                                 U parameters,
-                                                string conexionString,
+                                                string conexionStringName,
                                                 dynamic? options = null)
     {
+        string conexionString = _config.GetConnectionString(conexionStringName)!;
         CommandType commandType = CommandType.Text;
         if (options?.IsStoedProcedure != null && options?.IsStoedProcedure == true)
         {
@@ -54,9 +56,10 @@ public class SqlDataAccess : IDataAccess
 
     public List<T> LoadData<T, U>(string sqlStatement,
                                   U parameters,
-                                  string conexionString,
+                                  string conexionStringName,
                                   dynamic? options = null)
     {
+        string conexionString = _config.GetConnectionString(conexionStringName)!;
         CommandType commandType = CommandType.Text;
 
         if (options?.IsStoedProcedure != null && options?.IsStoedProcedure == true)
@@ -73,9 +76,10 @@ public class SqlDataAccess : IDataAccess
 
     public async Task<List<T>> LoadDataAsync<T, U>(string sqlStatement,
                                                    U parameters,
-                                                   string conexionString,
+                                                   string conexionStringName,
                                                    dynamic? options = null)
     {
+        string conexionString = _config.GetConnectionString(conexionStringName)!;
         CommandType commandType = CommandType.Text;
 
         if (options?.IsStoedProcedure != null && options?.IsStoedProcedure == true)
@@ -91,9 +95,10 @@ public class SqlDataAccess : IDataAccess
     }
     public void SaveData<T>(string sqlStatement,
                             T parameters,
-                            string conexionString,
+                            string conexionStringName,
                             dynamic? options = null)
     {
+        string conexionString = _config.GetConnectionString(conexionStringName)!;
         CommandType commandType = CommandType.Text;
 
         if (options?.IsStoedProcedure != null && options?.IsStoedProcedure == true)
@@ -107,9 +112,10 @@ public class SqlDataAccess : IDataAccess
     }
     public async Task SaveDataAsync<T>(string sqlStatement,
                                        T parameters,
-                                       string conexionString,
+                                       string conexionStringName,
                                        dynamic? options = null)
     {
+        string conexionString = _config.GetConnectionString(conexionStringName)!;
         CommandType commandType = CommandType.Text;
 
         if (options?.IsStoedProcedure != null && options?.IsStoedProcedure == true)

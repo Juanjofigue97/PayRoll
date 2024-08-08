@@ -1,0 +1,35 @@
+﻿@inject IAgencyRepository db
+@inject DialogService dialogService
+
+<h3>Crear Agencia</h3>
+
+<RadzenStack Gap="1rem" Orientation="Orientation.Vertical" JustifyContent="JustifyContent.SpaceBetween" Style="height: 100%;">
+    <RadzenStack>
+        <EditForm Model="agency" method="post" OnValidSubmit="CreateAgency">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <RadzenFieldset Text="Agencia">
+                <RadzenStack>
+                    <RadzenFormField Text="Nombre" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="@agency.Name" />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Descripción" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="agency.Description" />
+                    </RadzenFormField>
+                </RadzenStack>
+            </RadzenFieldset>
+            <button type="submit" class="btn btn-primary">Crear</button>
+        </EditForm>
+    </RadzenStack>
+</RadzenStack>
+
+@code {
+    private AgencyModel agency = new();
+
+    private async Task CreateAgency()
+    {
+        await db.InsertAgency(agency);
+        agency = new();
+        dialogService.Close(true);
+    }
+}

@@ -76,11 +76,21 @@
     <Build Include="dbo\Tables\FixedExpenses.sql" />
     <Build Include="dbo\Tables\OtherExpenses.sql" />
     <Build Include="dbo\Stored Procedures\spAgencies_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spAgencies_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\spAgencies_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spAgencies_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\spAgencies_Update.sql" />
+    <Build Include="dbo\Stored Procedures\spBranches_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\spBranches_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spBranches_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\spBranches_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spBranches_Update.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\Publish Profiles\PayRollDB.publish.xml" />
+    <None Include="PayRollDB.publish.xml" />
   </ItemGroup>
 </Project>

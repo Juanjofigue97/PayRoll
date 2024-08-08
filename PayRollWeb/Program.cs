@@ -1,25 +1,28 @@
-using PayRoll.Web.Components;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using PayRollLibrary.Data;
 using PayRollLibrary.Databases;
+using PayRollWeb.Data;
 using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
+builder.Services.AddRazorPages();
+builder.Services.AddServerSideBlazor();
 
 builder.Services.AddRadzenComponents();
 
 builder.Services.AddTransient<IDataAccess, SqlDataAccess>();
-builder.Services.AddTransient<ISqlData, SqlData>();
+builder.Services.AddTransient<IAgencyRepository, SqlAgencyRepository>();
+
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error", createScopeForErrors: true);
+    app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
@@ -27,9 +30,10 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
-app.UseAntiforgery();
 
-app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+app.UseRouting();
+
+app.MapBlazorHub();
+app.MapFallbackToPage("/_Host");
 
 app.Run();

@@ -1,0 +1,50 @@
+﻿@inject IAgencyRepository db
+@inject DialogService dialogService
+
+<h3>Editar</h3>
+
+<RadzenStack Gap="1rem" Orientation="Orientation.Vertical" JustifyContent="JustifyContent.SpaceBetween" Style="height: 100%;">
+    <RadzenStack>
+        <EditForm Model="agencyToUpdate" method="post" OnValidSubmit="UpdateAgency">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <RadzenFieldset Text="Agencia">
+                <RadzenStack>
+                    <RadzenFormField Text="Nombre" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="@agencyToUpdate.Name" />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Descripción" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="agencyToUpdate.Description" />
+                    </RadzenFormField>
+                </RadzenStack>
+            </RadzenFieldset>
+            <button type="submit" class="btn btn-primary">Editar</button>
+        </EditForm>
+    </RadzenStack>
+</RadzenStack>
+
+
+
+
+@code {
+    private AgencyModel agencyToUpdate = new();
+
+    [Parameter] public int Id { get; set; }
+
+    private async Task UpdateAgency()
+    {
+        await db.UpdateAgency(agencyToUpdate);
+        dialogService.Close(true);
+    }
+
+    private async Task RefreshData()
+    {
+        agencyToUpdate = await db.GetAgencyByID(Id);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        await RefreshData();
+    }
+}
