@@ -1,0 +1,71 @@
+﻿@inject IAgencyRepository db
+@inject DialogService dialogService
+
+<h3>Editar</h3>
+
+<RadzenStack Gap="1rem" Orientation="Orientation.Vertical" JustifyContent="JustifyContent.SpaceBetween" Style="height: 100%;">
+    <RadzenStack>
+        <EditForm Model="branchToUpdate" method="post" OnValidSubmit="UpdateAgency">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <RadzenFieldset Text="Agencia">
+                <RadzenStack>
+                    <RadzenFormField Text="Nombre" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="@branchToUpdate.Name" />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Descripción" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="branchToUpdate.Description" />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Agencia" Variant="Variant.Outlined">
+                        <InputSelect id="agencyId" @bind-Value="@branchToUpdate.AgencyId" class="form-control">
+                            @if (agencyNames is not null)
+                            {
+                                @foreach (var a in agencyNames)
+                                {
+                                    if (a?.Id == branchToUpdate.Id)
+                                    {
+                                        <option selected value="@a.Id">@a.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@a?.Id">@a?.Name</option>
+                                    }
+                                }
+                            }
+                        </InputSelect>
+                    </RadzenFormField>
+                </RadzenStack>
+            </RadzenFieldset>
+            <button type="submit" class="btn btn-primary">Editar</button>
+        </EditForm>
+    </RadzenStack>
+</RadzenStack>
+
+
+
+
+@code {
+    private BranchModel branchToUpdate = new();
+    int value = 1;
+    IEnumerable<AgencyModel?> agencyNames;
+
+    [Parameter] public int Id { get; set; }
+
+    private async Task UpdateAgency()
+    {
+        await db.UpdateBranch(branchToUpdate);
+        dialogService.Close(true);
+    }
+
+    private async Task RefreshData()
+    {
+        branchToUpdate = await db.GetBranchByID(Id);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        agencyNames = await db.GetAllAgencies();
+        await RefreshData();
+    }
+}

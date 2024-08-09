@@ -70,7 +70,7 @@
     <Build Include="dbo\Tables\ContractTypes.sql" />
     <Build Include="dbo\Tables\Positions.sql" />
     <Build Include="dbo\Tables\MonthlyPayroll.sql" />
-    <Build Include="dbo\Tables\PaymentData.sql" />
+    <Build Include="dbo\Tables\PaymentDetail.sql" />
     <Build Include="dbo\Tables\Earned.sql" />
     <Build Include="dbo\Tables\Deducted.sql" />
     <Build Include="dbo\Tables\FixedExpenses.sql" />
@@ -108,6 +108,11 @@
     <Build Include="dbo\Stored Procedures\spPositions_GetById.sql" />
     <Build Include="dbo\Stored Procedures\spContracts_GetById.sql" />
     <Build Include="dbo\Stored Procedures\spDocuments_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\spPaymentDetails_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spPaymentDetails_Update.sql" />
+    <Build Include="dbo\Stored Procedures\spPaymentDetails_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\spPaymentDetails_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\spPaymentDetails_GetAll.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment.sql" />

@@ -1,0 +1,64 @@
+﻿@page "/DetallesPago-Crear"
+
+@inject IPaymentRepository db
+@inject IEmployeeRepository dbE
+@inject DialogService dialogService
+
+<h3>Create Payment Detail</h3>
+
+<RadzenStack Gap="1rem" Orientation="Orientation.Vertical" JustifyContent="JustifyContent.SpaceBetween" Style="height: 100%;">
+    <RadzenStack>
+        <EditForm Model="paymentDetail" method="post" OnValidSubmit="CreatePaymentDetail">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <RadzenFieldset Text="Create Payment Detail">
+                <RadzenStack>
+                    <RadzenFormField Text="Employee" Variant="Variant.Outlined">
+                        <InputSelect id="employeeId" @bind-Value="@paymentDetail.EmployeeId" class="form-control">
+                            @if (employees is not null)
+                            {
+                                @foreach (var e in employees)
+                                {
+                                    <option value="@e?.Id">@e?.FullName</option>
+                                }
+                            }
+                        </InputSelect>
+                    </RadzenFormField>
+                    <RadzenFormField Text="Bank Name" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="@paymentDetail.BankName" />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Account Number" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="@paymentDetail.AccountNumber" />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Account Type" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="@paymentDetail.AccountType" />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Payment Method" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="@paymentDetail.PaymentMethod" />
+                    </RadzenFormField>
+                </RadzenStack>
+            </RadzenFieldset>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </RadzenStack>
+</RadzenStack>
+
+@code {
+    private PaymentDetailModel paymentDetail = new();
+
+    IEnumerable<EmployeeViewModel> employees;
+
+    private async Task CreatePaymentDetail()
+    {
+        await db.InsertPaymentDetail(paymentDetail);
+        paymentDetail = new();
+        dialogService.Close(true);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        employees = await dbE.GetAllDetailViewEmployee(); 
+    }
+}
