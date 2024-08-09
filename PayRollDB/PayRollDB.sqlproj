@@ -91,6 +91,23 @@
     <Build Include="dbo\Stored Procedures\spDocuments_Delete.sql" />
     <Build Include="dbo\Stored Procedures\spEmployees_Delete.sql" />
     <Build Include="dbo\Stored Procedures\spPositions_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\spContracts_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spDocuments_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spEmployees_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spPositions_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spContracts_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spDocuments_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spPositions_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spEmployees_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spEmployees_Update.sql" />
+    <Build Include="dbo\Stored Procedures\spEmployees_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\spPositions_Update.sql" />
+    <Build Include="dbo\Stored Procedures\spContracts_Update.sql" />
+    <Build Include="dbo\Stored Procedures\spDocuments_Update.sql" />
+    <Build Include="dbo\Stored Procedures\spEmployees_DetailView.sql" />
+    <Build Include="dbo\Stored Procedures\spPositions_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\spContracts_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\spDocuments_GetById.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment.sql" />

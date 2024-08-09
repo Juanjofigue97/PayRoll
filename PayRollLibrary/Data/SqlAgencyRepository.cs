@@ -20,7 +20,7 @@ public class SqlAgencyRepository : IAgencyRepository
         return await _db.LoadDataAsync<AgencyModel, dynamic>(sql,
                                                   new { },
                                                   connectionString,
-                                                  new { IsStoedProcedure = true });
+                                                  new { IsStoredProcedure = true });
     }
 
     public async Task<AgencyModel?> GetAgencyByID(int agencyId)
@@ -29,7 +29,7 @@ public class SqlAgencyRepository : IAgencyRepository
         return await _db.FirstValueAsync<AgencyModel?, dynamic>(sql,
                                                                new { agencyId },
                                                                connectionString,
-                                                               new { IsStoedProcedure = true });
+                                                               new { IsStoredProcedure = true });
     }
 
     public async Task InsertAgency(AgencyModel agency)
@@ -38,7 +38,7 @@ public class SqlAgencyRepository : IAgencyRepository
         await _db.SaveDataAsync<dynamic?>(sql,
                                           new { name = agency.Name, description = agency.Description },
                                           connectionString,
-                                          new { IsStoedProcedure = true });
+                                          new { IsStoredProcedure = true });
     }
 
     public async Task DeleteAgency(int agencyId)
@@ -47,7 +47,7 @@ public class SqlAgencyRepository : IAgencyRepository
         await _db.LoadDataAsync<AgencyModel, dynamic>(sql,
                                                       new { id = agencyId },
                                                       connectionString,
-                                                      new { IsStoedProcedure = true });
+                                                      new { IsStoredProcedure = true });
     }
 
     public async Task UpdateAgency(AgencyModel agency)
@@ -61,7 +61,7 @@ public class SqlAgencyRepository : IAgencyRepository
                                                           description = agency.Description
                                                       },
                                                       connectionString,
-                                                      new { IsStoedProcedure = true });
+                                                      new { IsStoredProcedure = true });
     }
 
     public async Task<List<BranchModel>?> GetAllBranches()
@@ -70,7 +70,7 @@ public class SqlAgencyRepository : IAgencyRepository
         return await _db.LoadDataAsync<BranchModel, dynamic>(sql,
                                                   new { },
                                                   connectionString,
-                                                  new { IsStoedProcedure = true });
+                                                  new { IsStoredProcedure = true });
     }
 
     public async Task<BranchModel?> GetBranchByID(int branchId)
@@ -79,7 +79,7 @@ public class SqlAgencyRepository : IAgencyRepository
         return await _db.FirstValueAsync<BranchModel?, dynamic>(sql,
                                                                new { branchId },
                                                                connectionString,
-                                                               new { IsStoedProcedure = true });
+                                                               new { IsStoredProcedure = true });
     }
 
     public async Task InsertBranch(BranchModel branch)
@@ -93,7 +93,7 @@ public class SqlAgencyRepository : IAgencyRepository
                                               agencyId = branch.AgencyId 
                                           },
                                           connectionString,
-                                          new { IsStoedProcedure = true });
+                                          new { IsStoredProcedure = true });
     }
 
     public async Task DeleteBranch(int branchId)
@@ -102,7 +102,7 @@ public class SqlAgencyRepository : IAgencyRepository
         await _db.LoadDataAsync<BranchModel, dynamic>(sql,
                                                       new { id = branchId },
                                                       connectionString,
-                                                      new { IsStoedProcedure = true });
+                                                      new { IsStoredProcedure = true });
     }
 
     public async Task UpdateBranch(BranchModel branch)
@@ -117,7 +117,7 @@ public class SqlAgencyRepository : IAgencyRepository
                                              agencyId = branch.AgencyId
                                          },
                                          connectionString,
-                                         new { IsStoedProcedure = true });
+                                         new { IsStoredProcedure = true });
     }
 
     public async Task<List<BranchModelView>?> GetAllDetailViewBranches()
@@ -126,7 +126,7 @@ public class SqlAgencyRepository : IAgencyRepository
         return await _db.LoadDataAsync<BranchModelView, dynamic>(sql,
                                                   new { },
                                                   connectionString,
-                                                  new { IsStoedProcedure = true });
+                                                  new { IsStoredProcedure = true });
     }
     public async Task<BranchModelView?> DetailViewBranch(int branchId)
     {
@@ -134,6 +134,6 @@ public class SqlAgencyRepository : IAgencyRepository
         return await _db.FirstValueAsync<BranchModelView, dynamic>(sql,
                                          new{ branchId },
                                          connectionString,
-                                         new { IsStoedProcedure = true });
+                                         new { IsStoredProcedure = true });
     }
 }

@@ -1,4 +1,4 @@
-﻿@page "/Contract"
+﻿@page "/Cargos"
 
 @inject IEmployeeRepository bd
 @inject DialogService DialogService
@@ -9,7 +9,7 @@
     <RadzenButton Click="@RefreshData" Icon="autorenew" ButtonStyle="ButtonStyle.Primary"></RadzenButton>
 </div>
 
-<h3 class="pt-2">Tipo de Contrato</h3>
+<h3 class="pt-2">Tipo de Cargo</h3>
 
 @if (position is null)
 {

@@ -1,6 +1,7 @@
 ﻿using PayRollLibrary.Databases;
 using PayRollLibrary.Models.Agencies;
 using PayRollLibrary.Models.Employees;
+using PayRollLibrary.ModelView.Employees;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace PayRollLibrary.Data;
 
@@ -25,113 +27,244 @@ public class SqlEmployeeRepository : IEmployeeRepository
         await _db.LoadDataAsync<AgencyModel, dynamic>(sql,
                                                       new { id = contractId },
                                                       connectionString,
-                                                      new { IsStoedProcedure = true });
+                                                      new { IsStoredProcedure = true });
     }
 
     public async Task DeleteDocument(int DocumentId)
     {
         string sql = "dbo.spDocuments_Delete";
-        await _db.LoadDataAsync<AgencyModel, dynamic>(sql,
-                                                      new { id = DocumentId },
-                                                      connectionString,
-                                                      new { IsStoedProcedure = true });
+        await _db.SaveDataAsync<dynamic>(sql,
+                                         new { id = DocumentId },
+                                         connectionString,
+                                         new { IsStoredProcedure = true });
     }
 
     public async Task DeleteEmployee(int employeeId)
     {
         string sql = "dbo.spEmployees_Delete";
-        await _db.LoadDataAsync<AgencyModel, dynamic>(sql,
-                                                      new { id = employeeId },
-                                                      connectionString,
-                                                      new { IsStoedProcedure = true });
+        await _db.SaveDataAsync<dynamic>(sql,
+                                         new { id = employeeId },
+                                         connectionString,
+                                         new { IsStoredProcedure = true });
     }
 
     public async Task DeletePosition(int positionId)
     {
         string sql = "dbo.spPositions_Delete";
-        await _db.LoadDataAsync<AgencyModel, dynamic>(sql,
-                                                      new { id = positionId },
-                                                      connectionString,
-                                                      new { IsStoedProcedure = true });
+        await _db.SaveDataAsync<dynamic>(sql,
+                                         new { id = positionId },
+                                         connectionString,
+                                         new { IsStoredProcedure = true });
     }
 
-    public Task<List<ContractTypesModel>?> GetAllContract()
+    public async Task<List<EmployeeViewModel>?> GetAllDetailViewEmployee()
     {
-        throw new NotImplementedException();
+        string sql = "dbo.spEmployees_DetailView";
+        return await _db.LoadDataAsync<EmployeeViewModel, dynamic>(sql,
+                                                               new { },
+                                                               connectionString,
+                                                               new { IsStoredProcedure = true });
+    }
+    public async Task<List<ContractTypesModel>?> GetAllContract()
+    {
+        string sql = "dbo.spContracts_GetAll";
+        return await _db.LoadDataAsync<ContractTypesModel, dynamic>(sql,
+                                                                    new { },
+                                                                    connectionString,
+                                                                    new { IsStoredProcedure = true });
     }
 
-    public Task<List<DocumentTypesModel>?> GetAllDocument()
+    public async Task<List<DocumentTypesModel>?> GetAllDocument()
     {
-        throw new NotImplementedException();
+        string sql = "dbo.spDocuments_GetAll";
+        return await _db.LoadDataAsync<DocumentTypesModel, dynamic>(sql,
+                                                                    new { },
+                                                                    connectionString,
+                                                                    new { IsStoredProcedure = true });
     }
 
-    public Task<List<EmployeeModel>?> GetAllEmployee()
+    public async Task<List<EmployeeModel>?> GetAllEmployee()
     {
-        throw new NotImplementedException();
+        string sql = "dbo.spEmployees_GetAll";
+        return await _db.LoadDataAsync<EmployeeModel, dynamic>(sql,
+                                                               new { },
+                                                               connectionString,
+                                                               new { IsStoredProcedure = true });
     }
 
-    public Task<List<PositionModel>?> GetAllPosition()
+    public async Task<List<PositionModel>?> GetAllPosition()
     {
-        throw new NotImplementedException();
+        string sql = "dbo.spPositions_GetAll";
+        return await _db.LoadDataAsync<PositionModel, dynamic>(sql,
+                                                               new { },
+                                                               connectionString,
+                                                               new { IsStoredProcedure = true });
     }
 
-    public Task<ContractTypesModel?> GetContractByID(int contractId)
+    public async Task<ContractTypesModel?> GetContractByID(int contractId)
     {
-        throw new NotImplementedException();
+        string sql = "dbo.spContracts_GetById";
+        return await _db.FirstValueAsync<ContractTypesModel, dynamic>(sql,
+                                                                      new { contractId = contractId },
+                                                                      connectionString,
+                                                                      new { IsStoredProcedure = true });
     }
 
-    public Task<DocumentTypesModel?> GetDocumentByID(int documentId)
+    public async Task<DocumentTypesModel?> GetDocumentByID(int documentId)
     {
-        throw new NotImplementedException();
+        string sql = "dbo.spDocuments_GetById";
+        return await _db.FirstValueAsync<DocumentTypesModel, dynamic>(
+            sql,
+            new { documentId = documentId },
+            connectionString,
+            new { IsStoredProcedure = true }
+        );
     }
 
-    public Task<EmployeeModel?> GetEmployeeByID(int employeeeId)
+    public async Task<EmployeeModel?> GetEmployeeByID(int employeeId)
     {
-        throw new NotImplementedException();
+        string sql = "dbo.spEmployees_GetById";
+        return await _db.FirstValueAsync<EmployeeModel, dynamic>(sql,
+                                                                new { employeeId = employeeId },
+                                                                connectionString,
+                                                                new { IsStoredProcedure = true });
     }
 
-    public Task<PositionModel?> GetPositionByID(int positionId)
+    public async Task<PositionModel?> GetPositionByID(int positionId)
     {
-        throw new NotImplementedException();
+        string sql = "dbo.spPositions_GetById";
+        return await _db.FirstValueAsync<PositionModel, dynamic>(
+            sql,
+            new { positionId = positionId },
+            connectionString,
+            new { IsStoredProcedure = true }
+        );
     }
 
-    public Task InsertContract(ContractTypesModel contract)
+    public async Task InsertContract(ContractTypesModel contract)
     {
-        throw new NotImplementedException();
+        string sql = "dbo.spContracts_Insert";
+        await _db.SaveDataAsync<dynamic?>(sql,
+                                          new { name = contract.Name, description = contract.Description },
+                                          connectionString,
+                                          new { IsStoredProcedure = true });
     }
 
-    public Task InsertDocument(DocumentTypesModel document)
+    public async Task InsertDocument(DocumentTypesModel document)
     {
-        throw new NotImplementedException();
+        string sql = "dbo.spDocuments_Insert";
+        await _db.SaveDataAsync<dynamic?>(sql,
+                                          new { name = document.Name, description = document.Description },
+                                          connectionString,
+                                          new { IsStoredProcedure = true });
     }
 
-    public Task InsertEmployee(EmployeeModel employee)
+    public async Task InsertEmployee(EmployeeModel employee)
     {
-        throw new NotImplementedException();
+        string sql = "dbo.spEmployees_Insert";
+
+        await _db.SaveDataAsync<dynamic?>(sql,
+                                          new
+                                          {
+                                              documentId = employee.DocumentTypeId,
+                                              document = employee.Document,
+                                              lastName = employee.LastName,
+                                              secondSurname = employee.SecondSurname,
+                                              firstName = employee.FirstName,
+                                              middleName = employee.MiddleName,
+                                              baseSalary = employee.BaseSalary,
+                                              contractId = employee.ContractTypeId,
+                                              branchId = employee.BranchId,
+                                              positionId = employee.PositionId
+                                          },
+                                          connectionString,
+                                          new { IsStoredProcedure = true });
     }
 
-    public Task InsertPosition(PositionModel position)
+    public async Task InsertPosition(PositionModel position)
     {
-        throw new NotImplementedException();
+        string sql = "dbo.spPositions_Insert";
+        await _db.SaveDataAsync<dynamic?>(sql,
+                                          new { name = position.Name, description = position.Description },
+                                          connectionString,
+                                          new { IsStoredProcedure = true });
     }
 
-    public Task UpdateContract(ContractTypesModel contract)
+    public async Task UpdateContract(ContractTypesModel contract)
     {
-        throw new NotImplementedException();
+        string sql = "dbo.spContracts_Update";
+
+        await _db.SaveDataAsync<dynamic?>(sql,
+                                            new
+                                            {
+                                                id = contract.Id,
+                                                name = contract.Name,
+                                                description = contract.Description
+                                            },
+                                            connectionString,
+                                            new { IsStoredProcedure = true });
     }
 
-    public Task UpdateDocument(DocumentTypesModel document)
+    public async Task UpdateDocument(DocumentTypesModel document)
     {
-        throw new NotImplementedException();
+        string sql = "dbo.spDocuments_Update";
+
+        await _db.SaveDataAsync<dynamic?>(
+            sql,
+            new
+            {
+                id = document.Id,
+                name = document.Name,
+                description = document.Description
+            },
+            connectionString,
+            new { IsStoredProcedure = true }
+        );
     }
 
-    public Task UpdateEmployee(EmployeeModel employee)
+    public async Task UpdateEmployee(EmployeeModel employee)
     {
-        throw new NotImplementedException();
+        string sql = "dbo.spEmployees_Update";
+
+        await _db.SaveDataAsync<dynamic?>(sql,
+                                new
+                                {
+                                    employeeId = employee.Id,
+                                    documentId = employee.DocumentTypeId,
+                                    document = employee.Document,
+                                    lastName = employee.LastName,
+                                    secondSurname = employee.SecondSurname,
+                                    firstName = employee.FirstName,
+                                    middleName = employee.MiddleName,
+                                    baseSalary = employee.BaseSalary,
+                                    contractId = employee.ContractTypeId,
+                                    branchId = employee.BranchId,
+                                    positionId = employee.PositionId,
+                                    photo = employee.Photo ?? string.Empty,
+                                    isValid = employee.IsValid
+                                },
+                                connectionString,
+                                new { IsStoredProcedure = true });
     }
 
-    public Task UpdatePosition(PositionModel position)
+
+    public async Task UpdatePosition(PositionModel position)
     {
-        throw new NotImplementedException();
+        string sql = "dbo.spPositions_Update";
+
+        await _db.SaveDataAsync<dynamic?>(
+            sql,
+            new
+            {
+                id = position.Id,
+                name = position.Name,
+                description = position.Description
+            },
+            connectionString,
+            new { IsStoredProcedure = true }
+        );
     }
+
+
+
 }

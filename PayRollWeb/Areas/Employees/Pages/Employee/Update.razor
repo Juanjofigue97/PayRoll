@@ -1,71 +1,120 @@
-﻿@inject IAgencyRepository db
+﻿@inject IEmployeeRepository db
+@inject IAgencyRepository dbA
 @inject DialogService dialogService
 
-<h3>Editar</h3>
+<h3>Editar Empleado</h3>
 
 <RadzenStack Gap="1rem" Orientation="Orientation.Vertical" JustifyContent="JustifyContent.SpaceBetween" Style="height: 100%;">
     <RadzenStack>
-        <EditForm Model="branchToUpdate" method="post" OnValidSubmit="UpdateAgency">
+        <EditForm Model="employeeToUpdate" method="post" OnValidSubmit="UpdateEmployee">
             <DataAnnotationsValidator />
             <ValidationSummary />
-            <RadzenFieldset Text="Agencia">
+            <RadzenFieldset Text="Crear Empleado">
                 <RadzenStack>
-                    <RadzenFormField Text="Nombre" Variant="Variant.Outlined">
-                        <RadzenTextBox @bind-Value="@branchToUpdate.Name" />
+                    <RadzenFormField Text="Tipo de Documento" Variant="Variant.Outlined">
+                        <InputSelect id="documentId" @bind-Value="@employeeToUpdate.DocumentTypeId" class="form-control">
+                            @if (documentNames is not null)
+                            {
+                                @foreach (var a in documentNames)
+                                {
+                                    <option value="@a?.Id">@a?.Name</option>
+                                }
+                            }
+                        </InputSelect>
                     </RadzenFormField>
-                    <RadzenFormField Text="Descripción" Variant="Variant.Outlined">
-                        <RadzenTextBox @bind-Value="branchToUpdate.Description" />
+                    <RadzenFormField Text="Cedula" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="@employeeToUpdate.Document" />
+                    </RadzenFormField>
+
+                    <RadzenFormField Text="Primer Apellido" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="@employeeToUpdate.LastName" />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Segundo Apellido" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="@employeeToUpdate.SecondSurname" />
+                    </RadzenFormField>
+
+                    <RadzenFormField Text="Primer Nombre" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="@employeeToUpdate.FirstName" />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Segundo Nombre" Variant="Variant.Outlined">
+                        <RadzenTextBox @bind-Value="@employeeToUpdate.MiddleName" />
+                    </RadzenFormField>
+
+                    <RadzenFormField Text="Segundo Nombre" Variant="Variant.Outlined">
+                        <RadzenNumeric @bind-Value="@employeeToUpdate.BaseSalary" />
+                    </RadzenFormField>
+
+                    <RadzenFormField Text="Tipo de Contrato" Variant="Variant.Outlined">
+                        <InputSelect id="documentId" @bind-Value="@employeeToUpdate.ContractTypeId" class="form-control">
+                            @if (contractNames is not null)
+                            {
+                                @foreach (var a in contractNames)
+                                {
+                                    <option value="@a?.Id">@a?.Name</option>
+                                }
+                            }
+                        </InputSelect>
                     </RadzenFormField>
                     <RadzenFormField Text="Agencia" Variant="Variant.Outlined">
-                        <InputSelect id="agencyId" @bind-Value="@branchToUpdate.AgencyId" class="form-control">
-                            @if (agencyNames is not null)
+                        <InputSelect id="documentId" @bind-Value="@employeeToUpdate.BranchId" class="form-control">
+                            @if (branchNames is not null)
                             {
-                                @foreach (var a in agencyNames)
+                                @foreach (var a in branchNames)
                                 {
-                                    if (a?.Id == branchToUpdate.Id)
-                                    {
-                                        <option selected value="@a.Id">@a.Name</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@a?.Id">@a?.Name</option>
-                                    }
+                                    <option value="@a?.Id">@a?.Name</option>
+                                }
+                            }
+                        </InputSelect>
+                    </RadzenFormField>
+                    <RadzenFormField Text="Tipo de Cargo" Variant="Variant.Outlined">
+                        <InputSelect id="documentId" @bind-Value="@employeeToUpdate.PositionId" class="form-control">
+                            @if (postionNames is not null)
+                            {
+                                @foreach (var a in postionNames)
+                                {
+                                    <option value="@a?.Id">@a?.Name</option>
                                 }
                             }
                         </InputSelect>
                     </RadzenFormField>
                 </RadzenStack>
             </RadzenFieldset>
-            <button type="submit" class="btn btn-primary">Editar</button>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
         </EditForm>
     </RadzenStack>
 </RadzenStack>
 
-
-
-
 @code {
-    private BranchModel branchToUpdate = new();
+    private EmployeeModel employeeToUpdate = new();
+    
     int value = 1;
-    IEnumerable<AgencyModel?> agencyNames;
+    IEnumerable<DocumentTypesModel?> documentNames;
+    IEnumerable<ContractTypesModel?> contractNames;
+    IEnumerable<BranchModel?> branchNames;
+    IEnumerable<PositionModel?> postionNames;
+
+
 
     [Parameter] public int Id { get; set; }
 
-    private async Task UpdateAgency()
+    private async Task UpdateEmployee()
     {
-        await db.UpdateBranch(branchToUpdate);
+        await db.UpdateEmployee(employeeToUpdate);
         dialogService.Close(true);
     }
 
     private async Task RefreshData()
     {
-        branchToUpdate = await db.GetBranchByID(Id);
+        employeeToUpdate = await db.GetEmployeeByID(Id);
     }
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        agencyNames = await db.GetAllAgencies();
+        documentNames = await db.GetAllDocument();
+        contractNames = await db.GetAllContract();
+        postionNames = await db.GetAllPosition();
+        branchNames = await dbA.GetAllBranches();
         await RefreshData();
     }
 }

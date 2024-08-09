@@ -25,7 +25,7 @@ public class SqlDataAccess : IDataAccess
         string conexionString = _config.GetConnectionString(conexionStringName)!;
         CommandType commandType = CommandType.Text;
 
-        if (options?.IsStoedProcedure != null && options?.IsStoedProcedure == true)
+        if (options?.IsStoredProcedure != null && options?.IsStoredProcedure == true)
         {
             commandType = CommandType.StoredProcedure;
         }
@@ -43,7 +43,7 @@ public class SqlDataAccess : IDataAccess
     {
         string conexionString = _config.GetConnectionString(conexionStringName)!;
         CommandType commandType = CommandType.Text;
-        if (options?.IsStoedProcedure != null && options?.IsStoedProcedure == true)
+        if (options?.IsStoredProcedure != null && options?.IsStoredProcedure == true)
         {
             commandType = CommandType.StoredProcedure;
         }
@@ -62,7 +62,7 @@ public class SqlDataAccess : IDataAccess
         string conexionString = _config.GetConnectionString(conexionStringName)!;
         CommandType commandType = CommandType.Text;
 
-        if (options?.IsStoedProcedure != null && options?.IsStoedProcedure == true)
+        if (options?.IsStoredProcedure != null && options?.IsStoredProcedure == true)
         {
             commandType = CommandType.StoredProcedure;
         }
@@ -82,7 +82,7 @@ public class SqlDataAccess : IDataAccess
         string conexionString = _config.GetConnectionString(conexionStringName)!;
         CommandType commandType = CommandType.Text;
 
-        if (options?.IsStoedProcedure != null && options?.IsStoedProcedure == true)
+        if (options?.IsStoredProcedure != null && options?.IsStoredProcedure == true)
         {
             commandType = CommandType.StoredProcedure;
         }
@@ -101,7 +101,7 @@ public class SqlDataAccess : IDataAccess
         string conexionString = _config.GetConnectionString(conexionStringName)!;
         CommandType commandType = CommandType.Text;
 
-        if (options?.IsStoedProcedure != null && options?.IsStoedProcedure == true)
+        if (options?.IsStoredProcedure != null && options?.IsStoredProcedure == true)
         {
             commandType = CommandType.StoredProcedure;
         }
@@ -118,7 +118,7 @@ public class SqlDataAccess : IDataAccess
         string conexionString = _config.GetConnectionString(conexionStringName)!;
         CommandType commandType = CommandType.Text;
 
-        if (options?.IsStoedProcedure != null && options?.IsStoedProcedure == true)
+        if (options?.IsStoredProcedure != null && options?.IsStoredProcedure == true)
         {
             commandType = CommandType.StoredProcedure;
         }

@@ -2,7 +2,7 @@
 @inject IAgencyRepository dbA
 @inject DialogService dialogService
 
-<h3>Crear Extension</h3>
+<h3>Crear Colaborador</h3>
 
 <RadzenStack Gap="1rem" Orientation="Orientation.Vertical" JustifyContent="JustifyContent.SpaceBetween" Style="height: 100%;">
     <RadzenStack>
@@ -13,6 +13,7 @@
                 <RadzenStack>
                     <RadzenFormField Text="Tipo de Documento" Variant="Variant.Outlined">
                         <InputSelect id="documentId" @bind-Value="@employee.DocumentTypeId" class="form-control">
+                            <option value="">Seleccionar Tipo de Documento</option>
                             @if (documentNames is not null)
                             {
                                 @foreach (var a in documentNames)
@@ -40,8 +41,13 @@
                         <RadzenTextBox @bind-Value="@employee.MiddleName" />
                     </RadzenFormField>
 
+                    <RadzenFormField Text="Salario Basico" Variant="Variant.Outlined">
+                        <RadzenNumeric @bind-Value="@employee.BaseSalary" />
+                    </RadzenFormField>
+
                     <RadzenFormField Text="Tipo de Contrato" Variant="Variant.Outlined">
                         <InputSelect id="documentId" @bind-Value="@employee.ContractTypeId" class="form-control">
+                            <option value="">Seleccionar Tipo de Contrato</option>
                             @if (contractNames is not null)
                             {
                                 @foreach (var a in contractNames)
@@ -53,6 +59,7 @@
                     </RadzenFormField>
                     <RadzenFormField Text="Agencia" Variant="Variant.Outlined">
                         <InputSelect id="documentId" @bind-Value="@employee.BranchId" class="form-control">
+                            <option value="">Seleccionar Agencia o Extension</option>
                             @if (branchNames is not null)
                             {
                                 @foreach (var a in branchNames)
@@ -63,7 +70,8 @@
                         </InputSelect>
                     </RadzenFormField>
                     <RadzenFormField Text="Tipo de Cargo" Variant="Variant.Outlined">
-                        <InputSelect id="documentId" @bind-Value="@employee.PositionId" class="form-control">
+                        <InputSelect @bind-Value="@employee.PositionId" class="form-control">
+                            <option value="">Seleccionar Tipo de Cargo</option>
                             @if (postionNames is not null)
                             {
                                 @foreach (var a in postionNames)
@@ -76,7 +84,7 @@
 
                 </RadzenStack>
             </RadzenFieldset>
-            <button type="submit" class="btn btn-primary">Crear</button>
+            <button type="submit" class="btn btn-primary mt-2">Crear</button>
         </EditForm>
     </RadzenStack>
 </RadzenStack>

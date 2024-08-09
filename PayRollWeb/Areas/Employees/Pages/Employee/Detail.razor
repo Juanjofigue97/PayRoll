@@ -1,34 +1,51 @@
-﻿@inject IAgencyRepository db
+﻿@using PayRollLibrary.ModelView.Employees
+@inject IEmployeeRepository db
 @inject DialogService dialogService
 
-<h3>Detalles</h3>
+<h3>Detalles del Empleado</h3>
 
 <RadzenStack Gap="1rem" Orientation="Orientation.Vertical" JustifyContent="JustifyContent.SpaceBetween" Style="height: 100%;">
     <RadzenStack>
         <RadzenRow>
             <RadzenColumn Size="12" SizeMD="6" class="rz-p-4 rz-border-radius-1" Style="border: var(--rz-grid-cell-border)">
-                <RadzenText TextStyle="TextStyle.Subtitle1">Nombre</RadzenText>
+                <RadzenText TextStyle="TextStyle.Subtitle1">Nombre Completo</RadzenText>
                 <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center">
                     <RadzenStack Gap="0" class="rz-text-truncate">
-                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@branch.Name</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@employee.FullName</RadzenText>
                     </RadzenStack>
                 </RadzenStack>
             </RadzenColumn>
             <RadzenColumn Size="12" SizeMD="6" class="rz-p-4 rz-border-radius-1" Style="border: var(--rz-grid-cell-border)">
-                <RadzenText TextStyle="TextStyle.Subtitle1">Descripcion</RadzenText>
+                <RadzenText TextStyle="TextStyle.Subtitle1">Documento</RadzenText>
                 <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center">
                     <RadzenStack Gap="0" class="rz-text-truncate">
-                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@branch.Description</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@employee.Document</RadzenText>
                     </RadzenStack>
                 </RadzenStack>
             </RadzenColumn>
         </RadzenRow>
         <RadzenRow>
             <RadzenColumn Size="12" SizeMD="6" class="rz-p-4 rz-border-radius-1" Style="border: var(--rz-grid-cell-border)">
+                <RadzenText TextStyle="TextStyle.Subtitle1">Salario Base</RadzenText>
+                <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center">
+                    <RadzenStack Gap="0" class="rz-text-truncate">
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@employee.BaseSalary.ToString("C")</RadzenText>
+                    </RadzenStack>
+                </RadzenStack>
+            </RadzenColumn>
+            <RadzenColumn Size="12" SizeMD="6" class="rz-p-4 rz-border-radius-1" Style="border: var(--rz-grid-cell-border)">
                 <RadzenText TextStyle="TextStyle.Subtitle1">Agencia</RadzenText>
                 <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center">
                     <RadzenStack Gap="0" class="rz-text-truncate">
-                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@branch.AgencyName</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@employee.AgencyName</RadzenText>
+                    </RadzenStack>
+                </RadzenStack>
+            </RadzenColumn>
+            <RadzenColumn Size="12" SizeMD="6" class="rz-p-4 rz-border-radius-1" Style="border: var(--rz-grid-cell-border)">
+                <RadzenText TextStyle="TextStyle.Subtitle1">Sucursal</RadzenText>
+                <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center">
+                    <RadzenStack Gap="0" class="rz-text-truncate">
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@employee.BranchName</RadzenText>
                     </RadzenStack>
                 </RadzenStack>
             </RadzenColumn>
@@ -36,14 +53,15 @@
     </RadzenStack>
 </RadzenStack>
 
-@code{
-    private BranchModelView branch = new();
+@code {
+    private EmployeeViewModel employee = new();
 
     [Parameter] public int Id { get; set; }
 
     private async Task RefreshData()
     {
-        branch = await db.DetailViewBranch(Id);
+        List<EmployeeViewModel> employees = await db.GetAllDetailViewEmployee();
+        employee = employees?.FirstOrDefault(x=>x.Id == Id);
     }
 
     protected override async Task OnInitializedAsync()

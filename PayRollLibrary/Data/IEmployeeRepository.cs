@@ -1,6 +1,7 @@
 ﻿using PayRollLibrary.Models.Agencies;
 using PayRollLibrary.Models.Employees;
 using PayRollLibrary.ModelView.Agencies;
+using PayRollLibrary.ModelView.Employees;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,8 @@ public interface IEmployeeRepository
     
     // Employees
     Task<List<EmployeeModel>?> GetAllEmployee();
+    Task<List<EmployeeViewModel>?> GetAllDetailViewEmployee();
+
     Task<EmployeeModel?> GetEmployeeByID(int employeeeId);
     Task InsertEmployee(EmployeeModel employee);
     Task DeleteEmployee(int employeeId);

@@ -3,18 +3,38 @@
 <PageTitle>PayRollWeb</PageTitle>
 <RadzenComponents />
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
+<RadzenLayout>
+    <RadzenHeader>
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0">
+            <RadzenSidebarToggle Click="@(() => sidebarExpanded = !sidebarExpanded)" />
+            <RadzenLabel Text="PayRoll App" />
+        </RadzenStack>
+    </RadzenHeader>
+    <RadzenSidebar Responsive="false" Style="width: max-content">
+        <RadzenPanelMenu DisplayStyle="@(sidebarExpanded ? MenuItemDisplayStyle.IconAndText : MenuItemDisplayStyle.Icon)" ShowArrow="false">
+            <RadzenPanelMenuItem Text="DashBoard" Icon="Dashboard" Path="/" />
+            <RadzenPanelMenuItem Text="Colaboradores" Icon="description">
+                <RadzenPanelMenuItem Text="Contratos" Icon="color_lens" Path="/Contratos" />
+                <RadzenPanelMenuItem Text="Cargos" Icon="assessment" Path="/Cargos" />
+                <RadzenPanelMenuItem Text="Documentos" Icon="assignment" Path="/Documentos" />
+                <RadzenPanelMenuItem Text="Colaboradores" Icon="accessibility" Path="/Colaboradores" />
+            </RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Agencias" Icon="account_balance">
+                <RadzenPanelMenuItem Text="Agencias" Icon="book" Path="/Agencias" />
+                <RadzenPanelMenuItem Text="Extenciones" Icon="book" Path="/Extensiones" />
+            </RadzenPanelMenuItem>
+        </RadzenPanelMenu>
+    </RadzenSidebar>
+    <RadzenBody>
+        <div class="rz-p-4">
             @Body
-        </article>
-    </main>
-</div>
+        </div>
+    </RadzenBody>
+    <RadzenFooter>
+        Footer
+    </RadzenFooter>
+</RadzenLayout>
+
+@code {
+    bool sidebarExpanded = true;
+}
