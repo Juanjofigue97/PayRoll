@@ -113,6 +113,7 @@
     <Build Include="dbo\Stored Procedures\spPaymentDetails_Delete.sql" />
     <Build Include="dbo\Stored Procedures\spPaymentDetails_GetById.sql" />
     <Build Include="dbo\Stored Procedures\spPaymentDetails_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spPaymentDetails_GetAllDetailView.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment.sql" />

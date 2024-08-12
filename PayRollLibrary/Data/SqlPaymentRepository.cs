@@ -1,5 +1,6 @@
 ﻿using PayRollLibrary.Databases;
 using PayRollLibrary.Models.Payments;
+using PayRollLibrary.ModelView.Payments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,16 @@ public class SqlPaymentRepository : IPaymentRepository
             new { IsStoredProcedure = true });
     }
 
+    public async Task<List<PaymentDetailViewModel?>> GetPaymentDetailViewAll()
+    {
+        string sql = "dbo.spPaymentDetails_GetAllDetailView";
+        return await _db.LoadDataAsync<PaymentDetailViewModel?, dynamic>(sql,
+            new { },
+            connectionString,
+            new { IsStoredProcedure = true });
+    }
+
+    
     public async Task InsertPaymentDetail(PaymentDetailModel paymentDetail)
     {
         string sql = "dbo.spPaymentDetails_Insert";

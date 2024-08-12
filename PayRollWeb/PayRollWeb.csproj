@@ -18,6 +18,11 @@
   <ItemGroup>
     <Folder Include="Areas\Agencies\Data\" />
     <Folder Include="Areas\Employees\Data\" />
+    <Folder Include="Areas\Payments\Deducteds\" />
+    <Folder Include="Areas\Payments\Earneds\" />
+    <Folder Include="Areas\Payments\FixedExpenses\" />
+    <Folder Include="Areas\Payments\MonthlyPayRoll\" />
+    <Folder Include="Areas\Payments\OtherExpenses\" />
   </ItemGroup>
 
 </Project>

@@ -10,7 +10,7 @@
                 <RadzenText TextStyle="TextStyle.Subtitle1">Employee</RadzenText>
                 <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center">
                     <RadzenStack Gap="0" class="rz-text-truncate">
-                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@paymentDetail.EmployeeName</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@paymentDetail?.EmployeeName</RadzenText>
                     </RadzenStack>
                 </RadzenStack>
             </RadzenColumn>
@@ -18,7 +18,7 @@
                 <RadzenText TextStyle="TextStyle.Subtitle1">Bank Name</RadzenText>
                 <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center">
                     <RadzenStack Gap="0" class="rz-text-truncate">
-                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@paymentDetail.BankName</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@paymentDetail?.BankName</RadzenText>
                     </RadzenStack>
                 </RadzenStack>
             </RadzenColumn>
@@ -28,7 +28,7 @@
                 <RadzenText TextStyle="TextStyle.Subtitle1">Account Number</RadzenText>
                 <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center">
                     <RadzenStack Gap="0" class="rz-text-truncate">
-                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@paymentDetail.AccountNumber</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@paymentDetail?.AccountNumber</RadzenText>
                     </RadzenStack>
                 </RadzenStack>
             </RadzenColumn>
@@ -36,7 +36,7 @@
                 <RadzenText TextStyle="TextStyle.Subtitle1">Account Type</RadzenText>
                 <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center">
                     <RadzenStack Gap="0" class="rz-text-truncate">
-                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@paymentDetail.AccountType</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@paymentDetail?.AccountType</RadzenText>
                     </RadzenStack>
                 </RadzenStack>
             </RadzenColumn>
@@ -44,7 +44,7 @@
                 <RadzenText TextStyle="TextStyle.Subtitle1">Payment Method</RadzenText>
                 <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center">
                     <RadzenStack Gap="0" class="rz-text-truncate">
-                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@paymentDetail.PaymentMethod</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">@paymentDetail?.PaymentMethod</RadzenText>
                     </RadzenStack>
                 </RadzenStack>
             </RadzenColumn>
@@ -53,13 +53,14 @@
 </RadzenStack>
 
 @code {
-    private PaymentDetailModel paymentDetail = new();
+    private PaymentDetailViewModel? paymentDetail = new();
 
     [Parameter] public int Id { get; set; }
 
     private async Task RefreshData()
     {
-        paymentDetail = await db.GetPaymentDetailByID(Id);
+        var paymetns = await db.GetPaymentDetailViewAll();
+        paymentDetail = paymetns.Where(x => x?.Id == Id).FirstOrDefault();
     }
 
     protected override async Task OnInitializedAsync()

@@ -1,4 +1,5 @@
 ﻿using PayRollLibrary.Models.Payments;
+using PayRollLibrary.ModelView.Payments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,4 +51,5 @@ public interface IPaymentRepository
     Task InsertOtherExpenses(OtherExpensesModel otherExpenses);
     Task DeleteOtherExpenses(int id);
     Task UpdateOtherExpenses(OtherExpensesModel otherExpenses);
+    Task<List<PaymentDetailViewModel?>> GetPaymentDetailViewAll();
 }

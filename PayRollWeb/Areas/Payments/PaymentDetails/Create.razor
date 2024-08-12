@@ -15,6 +15,7 @@
                 <RadzenStack>
                     <RadzenFormField Text="Employee" Variant="Variant.Outlined">
                         <InputSelect id="employeeId" @bind-Value="@paymentDetail.EmployeeId" class="form-control">
+                            <option value="">Seleccionar Colaborador</option>
                             @if (employees is not null)
                             {
                                 @foreach (var e in employees)
