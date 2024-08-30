@@ -1,7 +1,4 @@
 using PayRoll_Infrastructure;
-using PayRoll_Infrastructure.Data;
-using PayRoll_Infrastructure.Databases;
-using PayRollApplication.Interfaces;
 using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);

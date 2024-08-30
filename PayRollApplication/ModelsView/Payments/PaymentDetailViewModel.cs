@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PayRollApplication.Models.Payments;
+namespace PayRollApplication.ModelsView.Payments;
 
 public class PaymentDetailViewModel
 {

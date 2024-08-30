@@ -1,5 +1,5 @@
-using PayRollLibrary.Data;
-using PayRollLibrary.Databases;
+using PayRoll_Infrastructure.Data;
+using PayRoll_Infrastructure.Databases;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +15,17 @@ builder.Services.AddTransient<IAgencyRepository, SqlAgencyRepository>();
 builder.Services.AddTransient<IEmployeeRepository, SqlEmployeeRepository>();
 builder.Services.AddTransient<IPaymentRepository, SqlPaymentRepository>();
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,7 +35,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseSwagger();
+app.UseSwaggerUI();
+
 app.UseHttpsRedirection();
+
+app.UseCors("AllowAllOrigins");
 
 app.UseAuthorization();
 

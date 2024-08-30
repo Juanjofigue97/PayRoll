@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PayRollApplicationLayer\PayRollApplication.csproj" />
+    <ProjectReference Include="..\PayRollApplication\PayRollApplication.csproj" />
   </ItemGroup>
 
 </Project>

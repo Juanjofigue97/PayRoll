@@ -1,7 +1,7 @@
-﻿using PayRollApplication.Models.Agencies;
+﻿using PayRollApplication.ModelsView.Agencies;
 using PayRollLibrary.Entities.Agencies;
 
-namespace PayRollApplication.Interfaces;
+namespace PayRoll_Infrastructure.Data;
 
 public interface IAgencyRepository
 {

@@ -1,8 +1,7 @@
-﻿using PayRollApplication.Models.Employees;
+﻿using PayRollApplication.ModelsView.Employees;
 using PayRollLibrary.Entities.Employees;
 
-namespace PayRollApplication.Interfaces;
-
+namespace PayRoll_Infrastructure.Data;
 
 public interface IEmployeeRepository
 {
@@ -24,7 +23,7 @@ public interface IEmployeeRepository
     Task InsertPosition(PositionModel position);
     Task DeletePosition(int positionId);
     Task UpdatePosition(PositionModel position);
-    
+
     // Employees
     Task<List<EmployeeModel>?> GetAllEmployee();
     Task<List<EmployeeViewModel>?> GetAllDetailViewEmployee();

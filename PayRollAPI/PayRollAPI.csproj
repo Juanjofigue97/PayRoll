@@ -12,8 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PayRollDB\PayRollDB.sqlproj" />
-    <ProjectReference Include="..\PayRollLibrary\PayRollLibrary.csproj" />
+    <ProjectReference Include="..\PayRoll_Infrastructure\PayRoll_Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace PayRollApplication.Models.Agencies;
+﻿namespace PayRollApplication.ModelsView.Agencies;
 
 public class BranchModelView
 {

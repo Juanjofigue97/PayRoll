@@ -1,5 +1,6 @@
-﻿using PayRoll_Infrastructure.Databases;
-using PayRollApplication.Models.Payments;
+﻿using PayRoll_Infrastructure.Data;
+using PayRoll_Infrastructure.Databases;
+using PayRollApplication.ModelsView.Payments;
 using PayRollLibrary.Entities.Payments;
 
 namespace PayRoll_Infrastructure.Data;

@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PayRollApplicationLayer\PayRollApplication.csproj" />
+    <ProjectReference Include="..\PayRollApplication\PayRollApplication.csproj" />
     <ProjectReference Include="..\PayRollLibrary\PayRollLibrary.csproj" />
     <ProjectReference Include="..\PayRoll_Infrastructure\PayRoll_Infrastructure.csproj" />
   </ItemGroup>

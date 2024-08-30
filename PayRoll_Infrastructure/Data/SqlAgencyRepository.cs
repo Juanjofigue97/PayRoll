@@ -1,5 +1,5 @@
 ﻿using PayRoll_Infrastructure.Databases;
-using PayRollApplication.Models.Agencies;
+using PayRollApplication.ModelsView.Agencies;
 using PayRollLibrary.Entities.Agencies;
 
 namespace PayRoll_Infrastructure.Data;

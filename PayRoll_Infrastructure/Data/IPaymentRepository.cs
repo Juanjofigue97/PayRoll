@@ -1,8 +1,7 @@
-﻿using PayRollApplication.Models.Payments;
+﻿using PayRollApplication.ModelsView.Payments;
 using PayRollLibrary.Entities.Payments;
 
-namespace PayRollApplication.Interfaces;
-
+namespace PayRoll_Infrastructure.Data;
 
 public interface IPaymentRepository
 {

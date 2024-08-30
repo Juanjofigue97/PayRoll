@@ -9,11 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayRollLibrary", "PayRollLi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayRollWeb", "PayRollWeb\PayRollWeb.csproj", "{72783410-3D9C-4E92-AA9D-EAD8851EE774}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayRollApplication", "PayRollApplicationLayer\PayRollApplication.csproj", "{791F928F-FC6A-4BAB-ADCA-C3E4C6BDE404}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayRoll_Infrastructure", "PayRoll_Infrastructure\PayRoll_Infrastructure.csproj", "{AD09CE6B-B891-4BEF-9903-9039138B60D9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayRollAPI", "PayRollAPI\PayRollAPI.csproj", "{BD2F4E7F-E9A0-4837-89BE-AE4555A3405C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayRollApplication", "PayRollApplication\PayRollApplication.csproj", "{D7073618-8E40-4388-BC69-B4624878CB60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,10 +34,6 @@ Global
 		{72783410-3D9C-4E92-AA9D-EAD8851EE774}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72783410-3D9C-4E92-AA9D-EAD8851EE774}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72783410-3D9C-4E92-AA9D-EAD8851EE774}.Release|Any CPU.Build.0 = Release|Any CPU
-		{791F928F-FC6A-4BAB-ADCA-C3E4C6BDE404}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{791F928F-FC6A-4BAB-ADCA-C3E4C6BDE404}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{791F928F-FC6A-4BAB-ADCA-C3E4C6BDE404}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{791F928F-FC6A-4BAB-ADCA-C3E4C6BDE404}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AD09CE6B-B891-4BEF-9903-9039138B60D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AD09CE6B-B891-4BEF-9903-9039138B60D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD09CE6B-B891-4BEF-9903-9039138B60D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -46,6 +42,10 @@ Global
 		{BD2F4E7F-E9A0-4837-89BE-AE4555A3405C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD2F4E7F-E9A0-4837-89BE-AE4555A3405C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD2F4E7F-E9A0-4837-89BE-AE4555A3405C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7073618-8E40-4388-BC69-B4624878CB60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7073618-8E40-4388-BC69-B4624878CB60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7073618-8E40-4388-BC69-B4624878CB60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7073618-8E40-4388-BC69-B4624878CB60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

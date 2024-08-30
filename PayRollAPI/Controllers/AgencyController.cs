@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using PayRollLibrary.Data;
-using PayRollLibrary.Models.Agencies;
+﻿using Microsoft.AspNetCore.Mvc;
+using PayRoll_Infrastructure.Data;
+using PayRollLibrary.Entities.Agencies;
 
 
 namespace PayRollAPI.Controllers;
@@ -50,8 +49,36 @@ public class AgencyController : ControllerBase
         _agencyRepository.UpdateAgency(agency);
     }
 
-    [HttpDelete("{id}")]
-    public void Delete(int id)
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult<AgencyModel>> DeleteAgency(int id)
     {
+        try
+        {
+            var agencyToDelete = await _agencyRepository.GetAgencyByID(id);
+
+            if (agencyToDelete == null)
+            {
+                return NotFound($"Agency with Id = {id} not found");
+            }
+
+            var branches = await _agencyRepository.GetAllBranches();
+
+            var ExistBranch = branches?.Count(x => x.AgencyId == id);
+
+            if (ExistBranch is not null && ExistBranch == 0)
+            {
+                await _agencyRepository.DeleteAgency(id);
+                return Ok($"Agency with Id = {id} has been deleted.");
+            }
+            else
+            {
+                return BadRequest($"Agency with Id = {id} have Branches");
+            }
+        }
+        catch (Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                "Error deleting data");
+        }
     }
 }

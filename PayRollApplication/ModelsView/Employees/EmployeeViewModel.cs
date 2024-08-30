@@ -1,4 +1,4 @@
-﻿namespace PayRollApplication.Models.Employees;
+﻿namespace PayRollApplication.ModelsView.Employees;
 public class EmployeeViewModel
 {
     public int Id { get; set; }
