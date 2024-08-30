@@ -1,8 +1,7 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using PayRollLibrary.Data;
-using PayRollLibrary.Databases;
-using PayRollWeb.Data;
+using PayRoll_Infrastructure;
+using PayRoll_Infrastructure.Data;
+using PayRoll_Infrastructure.Databases;
+using PayRollApplication.Interfaces;
 using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,10 +12,9 @@ builder.Services.AddServerSideBlazor();
 
 builder.Services.AddRadzenComponents();
 
-builder.Services.AddTransient<IDataAccess, SqlDataAccess>();
-builder.Services.AddTransient<IAgencyRepository, SqlAgencyRepository>();
-builder.Services.AddTransient<IEmployeeRepository, SqlEmployeeRepository>();
-builder.Services.AddTransient<IPaymentRepository, SqlPaymentRepository>();
+
+builder.Services.AddInfrastructure();
+
 
 
 var app = builder.Build();
